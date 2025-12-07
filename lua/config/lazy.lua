@@ -16,13 +16,15 @@ require("lazy").setup({
 
   -- Configurações Globais do lazy.nvim
   install = { colorscheme = { "tokyonight-night" } },
-  checker = { enabled = true },
-})
 
--- 3. AUTOCOMANDO: Auto-update lazy.nvim ao abrir o Vim
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    require("lazy").update({ show = false })
-  end,
+  -- Configuração de Verificação e Sincronização (Delay Asynchronous)
+  checker = {
+    enabled = true,                      -- Ativa a verificação
+    notify = true,                       -- Mostra notificação quando houver atualizações
+    check_start = "VeryLazy",            -- Inicia a verificação APÓS o carregamento completo do editor
+    sync = {
+      enabled = true,
+      delay = 3000,                      -- Atraso de 3 segundos (3000ms) antes de tentar sincronizar
+    },
+  },
 })
-
